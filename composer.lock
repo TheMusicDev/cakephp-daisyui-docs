@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5c7f756fa041c2eb84ea9c3da4820006",
+    "content-hash": "17a3386999e979698d11feeb897c2463",
     "packages": [
         {
             "name": "cakephp/cakephp",
@@ -1258,18 +1258,24 @@
         },
         {
             "name": "themusicdev/cakephp-daisyui",
-            "version": "dev-main",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TheMusicDev/cakephp-daisyui.git",
+                "reference": "2085eb30c2368902d2690a3cf92d9e3fbb008a03"
+            },
             "dist": {
-                "type": "path",
-                "url": "../cakephp-daisyui",
-                "reference": "c8a25aa9101130f7b13439089731b9c846f98a50"
+                "type": "zip",
+                "url": "https://api.github.com/repos/TheMusicDev/cakephp-daisyui/zipball/2085eb30c2368902d2690a3cf92d9e3fbb008a03",
+                "reference": "2085eb30c2368902d2690a3cf92d9e3fbb008a03",
+                "shasum": ""
             },
             "require": {
                 "cakephp/cakephp": "^5.2",
                 "php": ">=8.2"
             },
             "require-dev": {
-                "cakephp/cakephp-codesniffer": "^5.0",
+                "cakephp/cakephp-codesniffer": "^5.3",
                 "captainhook/captainhook": "^5.29",
                 "captainhook/hook-installer": "^1.0",
                 "phpstan/phpstan": "^2.0",
@@ -1282,38 +1288,16 @@
                     "TheMusicDev\\DaisyUi\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "TheMusicDev\\DaisyUi\\Test\\": "tests/"
-                }
-            },
-            "scripts": {
-                "test": [
-                    "phpunit"
-                ],
-                "cs-check": [
-                    "phpcs"
-                ],
-                "cs-fix": [
-                    "phpcbf"
-                ],
-                "stan": [
-                    "phpstan analyse"
-                ],
-                "check": [
-                    "@cs-check",
-                    "@stan",
-                    "@test"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
             "description": "daisyUI 5 view helpers for CakePHP 5",
-            "transport-options": {
-                "symlink": true,
-                "relative": true
-            }
+            "support": {
+                "issues": "https://github.com/TheMusicDev/cakephp-daisyui/issues",
+                "source": "https://github.com/TheMusicDev/cakephp-daisyui/tree/1.0.0"
+            },
+            "time": "2026-09-28T11:24:01+00:00"
         }
     ],
     "packages-dev": [
@@ -6915,9 +6899,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "themusicdev/cakephp-daisyui": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

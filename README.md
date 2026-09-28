@@ -11,6 +11,13 @@ bin/cake server -p 8765
 
 Then open <http://localhost:8765>.
 
-The app expects the plugin repo checked out next to this one at `../cakephp-daisyui` (a Composer path repository — see `composer.json`).
+The plugin comes from Packagist (`themusicdev/cakephp-daisyui` ^1.0). To try unreleased plugin changes locally, point Composer at a checkout next to this repo:
+
+```sh
+composer config repositories.plugin '{"type": "path", "url": "../cakephp-daisyui", "options": {"symlink": true, "versions": {"themusicdev/cakephp-daisyui": "1.x-dev"}}}'
+composer update themusicdev/cakephp-daisyui
+```
+
+Don't commit that change to `composer.json` / `composer.lock`.
 
 How pages are built is described in `../project-planning/project-overview.md` §7.

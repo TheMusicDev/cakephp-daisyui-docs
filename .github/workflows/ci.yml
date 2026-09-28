@@ -20,11 +20,6 @@ jobs:
         with:
           path: cakephp-daisyui-docs
 
-      - uses: actions/checkout@v4
-        with:
-          repository: TheMusicDev/cakephp-daisyui
-          path: cakephp-daisyui
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:

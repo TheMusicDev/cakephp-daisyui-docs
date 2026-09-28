@@ -9,7 +9,7 @@
         "cakephp/migrations": "^5.0",
         "cakephp/plugin-installer": "^2.0",
         "mobiledetect/mobiledetectlib": "^4.8.03",
-        "themusicdev/cakephp-daisyui": "dev-main"
+        "themusicdev/cakephp-daisyui": "^1.0"
     },
     "require-dev": {
         "cakephp/bake": "^3.6",
@@ -23,16 +23,6 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../cakephp-daisyui",
-            "options": {
-                "symlink": true,
-                "versions": { "themusicdev/cakephp-daisyui": "dev-main" }
-            }
-        }
-    ],
     "suggest": {
         "cakephp/repl": "Console tools for a REPL interface for CakePHP applications.",
         "dereuromark/cakephp-ide-helper": "After baking your code, this keeps your annotations in sync with the code evolving from there on for maximum IDE and PHPStan/Psalm compatibility.",
