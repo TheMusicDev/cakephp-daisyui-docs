@@ -1,9 +1,8 @@
 {
-    "name": "cakephp/app",
-    "description": "CakePHP skeleton app",
+    "name": "themusicdev/cakephp-daisyui-docs",
+    "description": "Live documentation for themusicdev/cakephp-daisyui",
     "license": "MIT",
     "type": "project",
-    "homepage": "https://cakephp.org",
     "require": {
         "php": ">=8.2",
         "cakephp/cakephp": "5.4.*",
@@ -58,7 +57,10 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         },
         "platform-check": true,
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "php": "8.2.0"
+        }
     },
     "scripts": {
         "post-install-cmd": "App\\Console\\Installer::postInstall",

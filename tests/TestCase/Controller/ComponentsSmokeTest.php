@@ -30,12 +30,11 @@ class ComponentsSmokeTest extends TestCase
     public function testEveryRegisteredComponentPageReturns200(): void
     {
         $all = ComponentRegistry::all();
-        $this->assertIsArray($all);
         foreach ($all as $components) {
             foreach (array_keys($components) as $slug) {
                 $this->get('/components/' . $slug);
 
-                $this->assertResponseOk();
+                $this->assertResponseOk('Component page failed: ' . $slug);
             }
         }
     }

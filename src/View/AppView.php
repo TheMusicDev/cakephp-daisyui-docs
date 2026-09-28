@@ -41,5 +41,6 @@ class AppView extends View
     public function initialize(): void
     {
         $this->loadDaisyUi();
+        $this->addHelper('Docs');
     }
 }

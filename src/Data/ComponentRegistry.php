@@ -5,6 +5,7 @@ namespace App\Data;
 
 use Cake\Http\Exception\NotFoundException;
 use DirectoryIterator;
+use RuntimeException;
 
 /**
  * Loads the component metadata files under config/components/.
@@ -38,7 +39,7 @@ final class ComponentRegistry
      */
     public static function all(): array
     {
-        self::$all ??= self::scan();
+        self::$all ??= self::load(CONFIG . 'components');
 
         return self::$all;
     }
@@ -62,18 +63,20 @@ final class ComponentRegistry
     }
 
     /**
-     * Reads every config/components/*.php and groups by category in the
-     * spec's fixed order; slugs are sorted alphabetically.
+     * Reads every $dir/*.php and groups by category in the spec's fixed
+     * order; slugs are sorted alphabetically. A metadata file whose
+     * `category` is not one of the seven daisyUI categories throws.
      *
+     * @param string $dir Directory containing {slug}.php metadata files.
      * @return array<string, array<string, array<string, mixed>>>
+     * @throws \RuntimeException When a file names an unknown category.
      */
-    private static function scan(): array
+    public static function load(string $dir): array
     {
-        $grouped = [];
-        $dir = CONFIG . 'components';
         if (!is_dir($dir)) {
             return [];
         }
+        $grouped = [];
         foreach (new DirectoryIterator($dir) as $file) {
             if ($file->isDot() || $file->getExtension() !== 'php') {
                 continue;
@@ -81,10 +84,16 @@ final class ComponentRegistry
             /** @var array<string, mixed> $component */
             $component = require $file->getPathname();
             $category = (string)($component['category'] ?? '');
+            if (!in_array($category, self::CATEGORY_ORDER, true)) {
+                throw new RuntimeException(sprintf(
+                    'Unknown component category "%s" in %s.',
+                    $category,
+                    $file->getFilename(),
+                ));
+            }
             $slug = basename($file->getPathname(), '.php');
             $grouped[$category][$slug] = $component;
         }
-        ksort($grouped);
 
         $out = [];
         foreach (self::CATEGORY_ORDER as $category) {

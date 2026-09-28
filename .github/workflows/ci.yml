@@ -17,6 +17,13 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: cakephp-daisyui-docs
+
+      - uses: actions/checkout@v4
+        with:
+          repository: TheMusicDev/cakephp-daisyui
+          path: cakephp-daisyui
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -26,10 +33,13 @@ jobs:
           coverage: none
 
       - name: Install dependencies
+        working-directory: cakephp-daisyui-docs
         run: composer install --prefer-dist --no-interaction
 
       - name: Coding standards
+        working-directory: cakephp-daisyui-docs
         run: composer cs-check
 
-      - name: Smoke test
+      - name: Tests
+        working-directory: cakephp-daisyui-docs
         run: vendor/bin/phpunit

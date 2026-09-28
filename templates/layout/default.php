@@ -6,7 +6,7 @@
 $cakeDescription = 'cakephp-daisyui documentation';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">

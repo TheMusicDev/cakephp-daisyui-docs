@@ -58,22 +58,6 @@ return function (RouteBuilder $routes): void {
         $builder->connect('/', ['controller' => 'Components', 'action' => 'index']);
         $builder->connect('/components/{slug}', ['controller' => 'Components', 'action' => 'view'])
             ->setPass(['slug']);
-        $builder->connect('/pages/*', 'Pages::display');
-
-        /*
-         * Connect catchall routes for all controllers.
-         *
-         * The `fallbacks` method is a shortcut for
-         *
-         * ```
-         * $builder->connect('/{controller}', ['action' => 'index']);
-         * $builder->connect('/{controller}/{action}/*', []);
-         * ```
-         *
-         * It is NOT recommended to use fallback routes after your initial prototyping phase!
-         * See https://book.cakephp.org/5/en/development/routing.html#fallbacks-method for more information
-         */
-        $builder->fallbacks();
     });
 
     /*
