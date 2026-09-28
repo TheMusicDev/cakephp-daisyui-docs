@@ -48,6 +48,14 @@ $github = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBo
     . ' 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69'
     . '.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>';
 
+// A plain package-box mark: Packagist's own logo is too detailed to read at nav-icon size.
+$packagist = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"'
+    . ' stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    . '<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0'
+    . ' 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/>'
+    . '<path d="m7.5 4.27 9 5.15"/></svg>';
+$packagistUrl = 'https://packagist.org/packages/themusicdev/cakephp-daisyui';
+
 $navbar = $this->Navigation->navbar([
     'start' => $this->Layout->drawerButton($hamburger, 'docs-drawer', [
         'escape' => false,
@@ -56,7 +64,13 @@ $navbar = $this->Navigation->navbar([
         'class' => 'lg:hidden',
         'aria-label' => 'Open menu',
     ]) . $brand,
-    'end' => $this->Html->link($github, 'https://github.com/TheMusicDev/cakephp-daisyui', [
+    'end' => $this->Html->link($packagist, $packagistUrl, [
+        'escapeTitle' => false,
+        'class' => 'btn btn-ghost btn-circle',
+        'aria-label' => 'Packagist package',
+        'target' => '_blank',
+        'rel' => 'noopener',
+    ]) . $this->Html->link($github, 'https://github.com/TheMusicDev/cakephp-daisyui', [
         'escapeTitle' => false,
         'class' => 'btn btn-ghost btn-circle',
         'aria-label' => 'GitHub repository',
@@ -68,6 +82,7 @@ $navbar = $this->Navigation->navbar([
 $footer = $this->Layout->footer([
     ['title' => 'Project', 'links' => [
         'GitHub' => 'https://github.com/TheMusicDev/cakephp-daisyui',
+        'Packagist' => $packagistUrl,
         'Docs source' => 'https://github.com/TheMusicDev/cakephp-daisyui-docs',
     ]],
     ['title' => 'Built on', 'links' => [
