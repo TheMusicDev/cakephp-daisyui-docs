@@ -91,4 +91,18 @@ class DocsHelperTest extends TestCase
 
         $this->assertSame($before, ini_get('highlight.keyword'));
     }
+
+    /**
+     * @return void
+     */
+    public function testCodeBlockHasACopyButtonTargetingTheCodePanel(): void
+    {
+        $html = (new DocsHelper(new View()))->codeBlock('<?php echo 1;');
+
+        $this->assertMatchesRegularExpression(
+            '#<button type="button" data-copy-code[^>]*>Copy</button><div class="bg-base-200[^"]*">#',
+            $html,
+        );
+        $this->assertStringContainsString('echo', $html);
+    }
 }

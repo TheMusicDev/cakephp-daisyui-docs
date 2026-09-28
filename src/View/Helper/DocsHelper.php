@@ -114,4 +114,24 @@ class DocsHelper extends Helper
 
         return $html;
     }
+
+    /**
+     * A highlighted code block with a "Copy" button (`webroot/js/docs.js` wires it up).
+     * The button reads the code panel's own text, so it always copies exactly what's shown.
+     *
+     * @param string $code Source code.
+     * @param bool $fragment Same meaning as in `highlight()`.
+     * @return string
+     */
+    public function codeBlock(string $code, bool $fragment = false): string
+    {
+        $html = $this->highlight($code, $fragment);
+
+        return '<div class="relative group/code">'
+            . '<button type="button" data-copy-code'
+            . ' class="btn btn-xs btn-ghost absolute top-2 right-2 opacity-0 group-hover/code:opacity-100'
+            . ' focus-visible:opacity-100 transition-opacity">Copy</button>'
+            . '<div class="bg-base-200 rounded-box p-4 pr-16 overflow-x-auto text-sm">' . $html . '</div>'
+            . '</div>';
+    }
 }

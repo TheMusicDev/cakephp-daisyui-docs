@@ -13,17 +13,18 @@ $demoSource = is_file($demoPath) ? (string)file_get_contents($demoPath) : '';
 <p class="mb-6"><?= h((string)($component['description'] ?? '')) ?></p>
 
 <h2 class="text-xl font-semibold mt-8 mb-2">Signature</h2>
-<div class="bg-base-200 rounded-box p-4 overflow-x-auto text-sm">
-    <?= $this->Docs->highlight($this->Docs->signature($component['helper'], $component['method']), true) ?>
-</div>
+<?= $this->Docs->codeBlock($this->Docs->signature($component['helper'], $component['method']), true) ?>
 
 <h2 class="text-xl font-semibold mt-8 mb-2">Demo</h2>
-<div class="border border-base-300 rounded-box p-6 flex flex-col gap-4">
+<div
+    class="rounded-box border border-base-300 bg-base-200 p-6 flex flex-col gap-4"
+    style="background-image: radial-gradient(circle, color-mix(in oklab, var(--color-base-content) 18%, transparent) 1px, transparent 1px); background-size: 18px 18px;"
+>
     <?= $this->element('demos/' . $slug) ?>
 </div>
 
 <h2 class="text-xl font-semibold mt-8 mb-2">Usage</h2>
-<div class="bg-base-200 rounded-box p-4 overflow-x-auto text-sm"><?= $this->Docs->highlight($demoSource) ?></div>
+<?= $this->Docs->codeBlock($demoSource) ?>
 
 <?php if (!empty($component['options'])): ?>
     <h2 class="text-xl font-semibold mt-8 mb-2">Options</h2>

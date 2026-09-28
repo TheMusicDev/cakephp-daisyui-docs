@@ -461,4 +461,13 @@ return [
         'errorLevel' => null,
         'fixtureStrategy' => null,
     ],
+
+    /*
+     * Themes for the plugin's theme controller (spec §5.9). `autumn` is light,
+     * `forest` is dark; AssetsHelper::css() loads daisyUI's themes.css for them
+     * automatically since neither is the built-in `light`/`dark`.
+     */
+    'DaisyUi' => [
+        'themes' => ['autumn', 'forest'],
+    ],
 ];
