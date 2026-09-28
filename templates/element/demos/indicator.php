@@ -11,7 +11,7 @@
 
 <div class="mt-4">
     <?= $this->Layout->indicator(
-        '<img src="/img/cake-logo.png" alt="Avatar" class="w-12 h-12 rounded-full" />',
+        '<img src="https://www.loremfaces.net/96/id/4.jpg" alt="Avatar" class="w-12 h-12 rounded-full" />',
         '<div class="w-4 h-4 bg-green-500 rounded-full"></div>',
         ['placement' => ['bottom', 'end']],
     ) ?>

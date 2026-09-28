@@ -14,12 +14,12 @@
     ],
 ) ?>
 <?= $this->DataDisplay->card('Card with an image.', [
-    'image' => 'cake-logo.png',
+    'image' => 'https://picsum.photos/id/1015/400/225',
     'imageAlt' => 'CakePHP logo',
 ]) ?>
 <?= $this->DataDisplay->card('Side layout, medium.', [
     'title' => 'Side card',
-    'image' => 'cake-logo.png',
+    'image' => 'https://picsum.photos/id/1025/400/225',
     'imageAlt' => 'CakePHP logo',
     'size' => 'md',
     'modifier' => 'side',
