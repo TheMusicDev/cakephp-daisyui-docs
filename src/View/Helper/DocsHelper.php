@@ -70,4 +70,48 @@ class DocsHelper extends Helper
 
         return var_export($value, true);
     }
+
+    /**
+     * PHP's built-in highlighter colours: PHP's own defaults on light themes, a
+     * matching palette on dark ones. CSS `light-dark()` picks the pair member from
+     * the active theme's `color-scheme` (every daisyUI theme sets it), so the code
+     * recolours whenever the theme changes.
+     */
+    private const COLORS = [
+        'highlight.html' => 'light-dark(#000000, #E1E4E8)',
+        'highlight.default' => 'light-dark(#0000BB, #79B8FF)',
+        'highlight.keyword' => 'light-dark(#007700, #85E89D)',
+        'highlight.string' => 'light-dark(#DD0000, #F97583)',
+        'highlight.comment' => 'light-dark(#FF8000, #FFAB70)',
+    ];
+
+    /**
+     * Syntax-highlights PHP source (a template, or a code fragment with `$fragment`).
+     *
+     * @param string $code Source code.
+     * @param bool $fragment True for code without an opening `<?php` tag (e.g. a signature).
+     * @return string HTML (escaped by PHP's highlighter).
+     */
+    public function highlight(string $code, bool $fragment = false): string
+    {
+        $previous = [];
+        foreach (self::COLORS as $key => $color) {
+            $previous[$key] = ini_set($key, $color);
+        }
+        try {
+            $html = highlight_string($fragment ? '<?php ' . $code : $code, true);
+        } finally {
+            foreach ($previous as $key => $value) {
+                if ($value !== false) {
+                    ini_set($key, $value);
+                }
+            }
+        }
+        if ($fragment) {
+            // Drop the `<?php ` we added (PHP 8.2 renders the space as &nbsp;).
+            $html = (string)preg_replace('/&lt;\?php(?:&nbsp;| )/', '', $html, 1);
+        }
+
+        return $html;
+    }
 }

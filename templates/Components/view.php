@@ -13,7 +13,9 @@ $demoSource = is_file($demoPath) ? (string)file_get_contents($demoPath) : '';
 <p class="mb-6"><?= h((string)($component['description'] ?? '')) ?></p>
 
 <h2 class="text-xl font-semibold mt-8 mb-2">Signature</h2>
-<pre class="bg-base-200 rounded-box p-4 overflow-x-auto text-sm"><code><?= h($this->Docs->signature($component['helper'], $component['method'])) ?></code></pre>
+<div class="bg-base-200 rounded-box p-4 overflow-x-auto text-sm">
+    <?= $this->Docs->highlight($this->Docs->signature($component['helper'], $component['method']), true) ?>
+</div>
 
 <h2 class="text-xl font-semibold mt-8 mb-2">Demo</h2>
 <div class="border border-base-300 rounded-box p-6 flex flex-col gap-4">
@@ -21,7 +23,7 @@ $demoSource = is_file($demoPath) ? (string)file_get_contents($demoPath) : '';
 </div>
 
 <h2 class="text-xl font-semibold mt-8 mb-2">Usage</h2>
-<pre class="bg-base-200 rounded-box p-4 overflow-x-auto text-sm"><code><?= h($demoSource) ?></code></pre>
+<div class="bg-base-200 rounded-box p-4 overflow-x-auto text-sm"><?= $this->Docs->highlight($demoSource) ?></div>
 
 <?php if (!empty($component['options'])): ?>
     <h2 class="text-xl font-semibold mt-8 mb-2">Options</h2>

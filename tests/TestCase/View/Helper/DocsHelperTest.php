@@ -55,4 +55,40 @@ class DocsHelperTest extends TestCase
             $this->helper->signature(ClassMap::class, 'classes'),
         );
     }
+
+    /**
+     * @return void
+     */
+    public function testHighlightUsesThemeColorsAndEscapes(): void
+    {
+        $helper = new DocsHelper(new View());
+        $html = $helper->highlight("<p><?= \$this->Badge->badge('<b>') ?></p>\n");
+
+        $this->assertStringContainsString('light-dark(#007700, #85E89D)', $html);
+        $this->assertStringContainsString('light-dark(#DD0000, #F97583)', $html);
+        $this->assertStringContainsString('&lt;p&gt;', $html);
+        $this->assertStringNotContainsString('<b>', $html);
+    }
+
+    /**
+     * @return void
+     */
+    public function testHighlightFragmentDropsTheAddedOpenTag(): void
+    {
+        $html = (new DocsHelper(new View()))->highlight('Foo::bar(string $x): string', true);
+
+        $this->assertStringNotContainsString('php', $html);
+        $this->assertStringContainsString('Foo', $html);
+    }
+
+    /**
+     * @return void
+     */
+    public function testHighlightRestoresIniSettings(): void
+    {
+        $before = ini_get('highlight.keyword');
+        (new DocsHelper(new View()))->highlight('<?php echo 1;');
+
+        $this->assertSame($before, ini_get('highlight.keyword'));
+    }
 }
