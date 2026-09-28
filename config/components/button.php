@@ -1,22 +1,72 @@
 <?php
 declare(strict_types=1);
 
+use TheMusicDev\DaisyUi\View\Helper\ActionsHelper;
+
 return [
-    'category' => 'Actions',
     'title' => 'Button',
-    'description' => 'A clickable button or link. Renders `<button>` by default, '
-        . 'or `<a>` when `url` is set.',
-    'helper' => 'Actions',
+    'category' => 'Actions',
+    'description' => 'A clickable button or link. Renders `<button>` by default, or `<a>` when `url` is set.',
+    'helper' => ActionsHelper::class,
     'method' => 'button',
     'options' => [
-        ['name' => 'color', 'values' => 'neutral, primary, secondary, accent, info, success, warning, error', 'description' => 'daisyUI color class.'],
-        ['name' => 'appearance', 'values' => 'outline, dash, soft, ghost, link', 'description' => 'daisyUI style (outline/dash/soft/ghost/link).'],
-        ['name' => 'behavior', 'values' => 'active, disabled', 'description' => '`active` adds `btn-active`; `disabled` adds `btn-disabled`, `tabindex="-1"`, `role="button"` and `aria-disabled="true"`, plus the `disabled` attribute on `<button>`.'],
-        ['name' => 'size', 'values' => 'xs, sm, md, lg, xl', 'description' => 'daisyUI size class.'],
-        ['name' => 'modifier', 'values' => 'wide, block, square, circle', 'description' => 'daisyUI modifier class.'],
-        ['name' => 'url', 'values' => 'string or array', 'description' => 'When set, renders `<a>` via `Html->link()` instead of `<button>` (no `type` attribute).'],
-        ['name' => 'type', 'values' => 'submit, reset, …', 'description' => 'Overrides the default `type="button"` on `<button>`.'],
-        ['name' => 'class', 'values' => 'string or array', 'description' => 'Extra CSS classes, appended to the daisyUI classes.'],
-        ['name' => 'escape', 'values' => 'true (default), false', 'description' => '`false` passes the text through unescaped.'],
+        [
+            'name' => 'color',
+            'type' => 'string',
+            'default' => 'null',
+            'values' => 'neutral, primary, secondary, accent, info, success, warning, error',
+        ],
+        [
+            'name' => 'appearance',
+            'type' => 'string',
+            'default' => 'null',
+            'values' => 'outline, dash, soft, ghost, link',
+        ],
+        [
+            'name' => 'behavior',
+            'type' => 'string|array',
+            'default' => 'null',
+            'values' => 'active, disabled',
+            'description' => '`disabled` adds `btn-disabled`, `tabindex="-1"`, `role="button"` and '
+                . '`aria-disabled="true"`, plus the `disabled` attribute on `<button>`.',
+        ],
+        [
+            'name' => 'size',
+            'type' => 'string',
+            'default' => 'null',
+            'values' => 'xs, sm, md, lg, xl',
+        ],
+        [
+            'name' => 'modifier',
+            'type' => 'string|array',
+            'default' => 'null',
+            'values' => 'wide, block, square, circle',
+        ],
+        [
+            'name' => 'url',
+            'type' => 'string|array',
+            'default' => 'null',
+            'values' => 'Any URL Html->link() accepts',
+            'description' => 'Renders an `<a>` via `Html->link()` instead of a `<button>` (no `type` attribute).',
+        ],
+        [
+            'name' => 'type',
+            'type' => 'string',
+            'default' => "'button'",
+            'values' => 'button, submit, reset',
+            'description' => 'Only on `<button>`.',
+        ],
+        [
+            'name' => 'class',
+            'type' => 'string|array',
+            'default' => 'null',
+            'values' => 'Extra classes, appended',
+        ],
+        [
+            'name' => 'escape',
+            'type' => 'bool',
+            'default' => 'true',
+            'values' => 'false = output text as raw HTML',
+        ],
     ],
 ];

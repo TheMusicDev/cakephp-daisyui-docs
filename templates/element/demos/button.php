@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
 <p>
     <?= $this->Actions->button('Button') ?>
     <?= $this->Actions->button('Primary', ['color' => 'primary']) ?>
@@ -18,6 +23,14 @@
     <?= $this->Actions->button('Medium', ['size' => 'md']) ?>
     <?= $this->Actions->button('Large', ['size' => 'lg']) ?>
     <?= $this->Actions->button('Extra large', ['size' => 'xl']) ?>
+</p>
+<p>
+    <?= $this->Actions->button('Wide', ['modifier' => 'wide']) ?>
+    <?= $this->Actions->button('▲', ['modifier' => 'square']) ?>
+    <?= $this->Actions->button('●', ['modifier' => 'circle']) ?>
+</p>
+<p>
+    <?= $this->Actions->button('Block', ['modifier' => 'block']) ?>
 </p>
 <p>
     <?= $this->Actions->button('Active', ['behavior' => 'active']) ?>
