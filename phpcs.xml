@@ -5,6 +5,17 @@
         <exclude-pattern>*/src/Controller/*</exclude-pattern>
     </rule>
 
+    <!-- Docs metadata and demos: checked mainly so a missing final newline fails the build. -->
+    <rule ref="PSR2.Files.ClosingTag.NotAllowed">
+        <exclude-pattern>*/templates/*</exclude-pattern>
+    </rule>
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>*/config/components/*</exclude-pattern>
+        <exclude-pattern>*/templates/element/demos/*</exclude-pattern>
+    </rule>
+
     <file>src/</file>
     <file>tests/</file>
+    <file>config/components/</file>
+    <file>templates/element/demos/</file>
 </ruleset>
