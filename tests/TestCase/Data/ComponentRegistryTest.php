@@ -44,4 +44,34 @@ class ComponentRegistryTest extends TestCase
     {
         $this->assertSame([], ComponentRegistry::load(TESTS . 'test_files' . DS . 'no-such-dir'));
     }
+
+    /**
+     * @return void
+     */
+    public function testLoadThrowsWhenHelperIsNotAClassName(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('alias.php: "helper" must be a class name');
+        ComponentRegistry::load(TESTS . 'test_files' . DS . 'components' . DS . 'bad-helper');
+    }
+
+    /**
+     * @return void
+     */
+    public function testLoadThrowsOnIncompleteOptionRow(): void
+    {
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('novalues.php: option row 0 needs a string "values"');
+        ComponentRegistry::load(TESTS . 'test_files' . DS . 'components' . DS . 'bad-option');
+    }
+
+    /**
+     * Every real metadata file passes validation.
+     *
+     * @return void
+     */
+    public function testRealMetadataIsValid(): void
+    {
+        $this->assertNotEmpty(ComponentRegistry::load(CONFIG . 'components'));
+    }
 }

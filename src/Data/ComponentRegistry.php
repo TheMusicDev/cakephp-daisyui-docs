@@ -91,6 +91,7 @@ final class ComponentRegistry
                     $file->getFilename(),
                 ));
             }
+            self::validate($component, $file->getFilename());
             $slug = basename($file->getPathname(), '.php');
             $grouped[$category][$slug] = $component;
         }
@@ -104,5 +105,34 @@ final class ComponentRegistry
         }
 
         return $out;
+    }
+
+    /**
+     * Fails loudly on metadata the docs page can't render (spec §7).
+     *
+     * @param array<string, mixed> $component Metadata from one file.
+     * @param string $file File name, for the error message.
+     * @return void
+     * @throws \RuntimeException On a missing helper method or an incomplete option row.
+     */
+    private static function validate(array $component, string $file): void
+    {
+        $helper = $component['helper'] ?? null;
+        $method = $component['method'] ?? null;
+        if (!is_string($helper) || !is_string($method) || !method_exists($helper, $method)) {
+            throw new RuntimeException(sprintf(
+                '%s: "helper" must be a class name and "method" one of its methods (got %s::%s).',
+                $file,
+                var_export($helper, true),
+                var_export($method, true),
+            ));
+        }
+        foreach ((array)($component['options'] ?? []) as $i => $option) {
+            foreach (['name', 'type', 'default', 'values'] as $key) {
+                if (!is_array($option) || !is_string($option[$key] ?? null)) {
+                    throw new RuntimeException(sprintf('%s: option row %d needs a string "%s".', $file, $i, $key));
+                }
+            }
+        }
     }
 }
